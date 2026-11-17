@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#100b1c">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 <title>Mi Racha | RPG</title>
 <style>
 :root{--bg:#0d0916;--panel:#171126;--panel2:#211735;--line:#38284f;--purple:#a879f5;--lav:#d9c5ff;--gold:#e8c878;--text:#f7f1ff;--muted:#b5a8c9;--green:#75d6a0}
@@ -149,5 +152,15 @@ $("changeCharacterName").onclick=async()=>{const name=$("newCharacterName").valu
 $("addMission").onclick=async()=>{const name=$("newMission").value.trim();if(!name)return;todayData().missions.push({name,done:false});$("newMission").value="";await save()};
 onAuthStateChanged(auth,async current=>{user=current;$("login").classList.toggle("hidden",!!user);$("game").classList.add("hidden");$("nameSetup").classList.add("hidden");$("logout").hidden=!user;if(!user)return;try{const snap=await getDoc(docRef());data=snap.exists()?snap.data():newData();if(!data.days)data.days={};if(!data.habits)data.habits=defaults;if(!data.missions)data.missions=[];if(!data.achievementUnlocks)data.achievementUnlocks={};if(typeof data.renameTokens!=="number")data.renameTokens=0;if(typeof data.renameMilestonesClaimed!=="number")data.renameMilestonesClaimed=0;today=localDateKey(new Date());todayData();syncAchievements();syncRenameTokens();await setDoc(docRef(),data);if(!data.characterName){$("nameSetup").classList.remove("hidden");}else{$("game").classList.remove("hidden");render()}}catch(e){$("message").textContent="Error al cargar datos: "+e.message}});
 </script>
-</body>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(err => {
+      console.warn("No se pudo registrar el modo de aplicación:", err);
+    });
+  });
+}
+</script>
+\n</body>
 </html>
