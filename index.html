@@ -6,310 +6,98 @@
 <meta name="theme-color" content="#100b1c">
 <title>Mi Racha | RPG</title>
 <style>
-:root{
-  --bg:#0d0916;--panel:#171126;--panel2:#211735;--line:#38284f;
-  --purple:#a879f5;--purple2:#7145b8;--lav:#d9c5ff;--gold:#e8c878;
-  --text:#f7f1ff;--muted:#b5a8c9;--green:#75d6a0;--red:#ff8585;
-}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at top,#25163c 0%,var(--bg) 48%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;min-height:100vh}
-button,input{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-.app{max-width:1120px;margin:auto;padding:18px 18px 100px}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
-.brand{display:flex;align-items:center;gap:12px}
-.brand-mark{width:46px;height:46px;border:1px solid #7652a7;border-radius:15px;background:linear-gradient(145deg,#3a2359,#171126);display:grid;place-items:center;font-size:24px;box-shadow:0 0 25px #8b5bd533}
-.brand h1{font-size:20px;letter-spacing:2px;margin:0;color:var(--lav)}
-.brand p{margin:3px 0 0;color:var(--muted);font-size:12px}
-.top-actions{display:flex;align-items:center;gap:8px}
-.pill{border:1px solid var(--line);background:#1b1428;color:var(--gold);padding:8px 12px;border-radius:99px;font-size:12px;font-weight:700}
-.btn{border:1px solid #8b63c8;background:linear-gradient(135deg,#8b5bd2,#633ca5);color:white;border-radius:12px;padding:11px 15px;font-weight:700;box-shadow:0 5px 18px #7045ad33}
-.btn.secondary{background:#2a203a;border-color:#4c3a67;color:var(--lav);box-shadow:none}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-.panel{background:linear-gradient(145deg,#1b142b,#151020);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 12px 32px #0003}
-.login{max-width:440px;margin:8vh auto}
-.login h2{margin-top:0}
-.field{width:100%;padding:13px 14px;background:#0f0b18;border:1px solid #4b3b62;border-radius:12px;color:white;margin:7px 0}
-.message{color:var(--gold);min-height:22px;font-size:13px}
-.hero{display:grid;grid-template-columns:1.4fr .9fr;gap:16px;margin-bottom:16px}
-.hero-main{position:relative;overflow:hidden;background:radial-gradient(circle at 90% 15%,#67419a55,transparent 40%),linear-gradient(130deg,#241637,#171126 65%);border-color:#594078}
-.hero-main:after{content:"✦";position:absolute;right:28px;top:20px;font-size:80px;color:#d9c5ff12}
-.eyebrow{color:var(--gold);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:800}
-.player-row{display:flex;align-items:center;gap:16px;margin:12px 0}
-.avatar{width:86px;height:86px;flex:0 0 86px;border-radius:22px;background:linear-gradient(145deg,#3d2a59,#211735);border:1px solid #8060a8;display:grid;place-items:center;font-size:38px}
-.player-row h2{margin:0 0 4px;font-size:23px}
-.rank{color:var(--lav);font-size:13px}
-.xp-line{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin:12px 0 7px}
-.progress{height:11px;border-radius:99px;background:#342744;overflow:hidden;border:1px solid #49355f}
-.progress div{height:100%;width:0;background:linear-gradient(90deg,#8756ce,#d3b1ff);border-radius:99px;transition:width .25s}
-.hero-side{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.statbox{background:#211735;border:1px solid var(--line);border-radius:17px;padding:15px;display:flex;flex-direction:column;justify-content:center;min-height:105px}
-.statbox .symbol{font-size:20px}.statbox strong{font-size:25px;color:var(--lav);margin:5px 0}.statbox span:last-child{font-size:12px;color:var(--muted)}
-.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px}
-.section-head h2{font-size:18px;margin:0}
-.subtle{color:var(--muted);font-size:13px}
-.layout{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}
-.task{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #302440}
-.task:last-child{border-bottom:0}
-.task input{accent-color:var(--purple);width:19px;height:19px}
-.task-name{flex:1;font-weight:600;font-size:14px}
-.task small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
-.reward{color:var(--gold);font-size:12px;font-weight:800;white-space:nowrap}
-.mission-input{display:flex;gap:8px;margin-top:12px}
-.mission-input input{flex:1;min-width:0}
-.mission-input .field{margin:0}
-.nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
-.nav button{background:#1a1327;color:var(--muted);border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-weight:700}
-.nav button.active{background:#392454;color:#fff;border-color:#9367cf;box-shadow:inset 0 0 0 1px #9367cf44}
-.view{display:none}.view.active{display:block}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.skill{margin:13px 0}
-.skill-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px}
-.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.day{min-height:52px;border:1px solid var(--line);border-radius:10px;background:#1a1327;padding:7px;text-align:center;font-size:12px;color:var(--muted)}
-.day.done{border-color:#7c58b1;background:#35224c;color:#fff}
-.day.today{outline:2px solid var(--gold);outline-offset:1px}
-.badges{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.achievement{border:1px solid var(--line);border-radius:15px;padding:14px;background:#1b142a}
-.achievement .medal{font-size:25px}.achievement strong{display:block;margin:6px 0;font-size:13px}.achievement span{font-size:11px;color:var(--muted)}
-.summary-list{display:grid;gap:8px}
-.summary-item{display:flex;justify-content:space-between;background:#211735;border-radius:12px;padding:11px 13px;font-size:13px}
-footer{text-align:center;color:#887b9d;font-size:11px;margin-top:28px}
-@media(max-width:720px){.app{padding:13px 12px 95px}.hero{grid-template-columns:1fr}.layout,.grid2{grid-template-columns:1fr}.hero-side{grid-template-columns:repeat(4,1fr)}.statbox{min-height:90px;padding:10px}.statbox strong{font-size:20px}.brand h1{font-size:17px}.pill{display:none}.nav{display:grid;grid-template-columns:repeat(3,1fr)}.nav button{font-size:12px;padding:10px 5px}.badges{grid-template-columns:1fr 1fr}}
+:root{--bg:#0d0916;--panel:#171126;--panel2:#211735;--line:#38284f;--purple:#a879f5;--lav:#d9c5ff;--gold:#e8c878;--text:#f7f1ff;--muted:#b5a8c9;--green:#75d6a0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#25163c 0%,var(--bg) 48%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;min-height:100vh}button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}.app{max-width:1120px;margin:auto;padding:18px 18px 100px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:46px;height:46px;border:1px solid #7652a7;border-radius:15px;background:linear-gradient(145deg,#3a2359,#171126);display:grid;place-items:center;font-size:24px}.brand h1{font-size:20px;letter-spacing:2px;margin:0;color:var(--lav)}.brand p{margin:3px 0 0;color:var(--muted);font-size:12px}.top-actions{display:flex;align-items:center;gap:8px}.pill{border:1px solid var(--line);background:#1b1428;color:var(--gold);padding:8px 12px;border-radius:99px;font-size:12px;font-weight:700}.btn{border:1px solid #8b63c8;background:linear-gradient(135deg,#8b5bd2,#633ca5);color:white;border-radius:12px;padding:11px 15px;font-weight:700}.btn.secondary{background:#2a203a;border-color:#4c3a67;color:var(--lav)}.panel{background:linear-gradient(145deg,#1b142b,#151020);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 12px 32px #0003}.login{max-width:440px;margin:8vh auto}.login h2{margin-top:0}.field{width:100%;padding:13px 14px;background:#0f0b18;border:1px solid #4b3b62;border-radius:12px;color:white;margin:7px 0}.message{color:var(--gold);min-height:22px;font-size:13px}.hero{display:grid;grid-template-columns:1.4fr .9fr;gap:16px;margin-bottom:16px}.hero-main{background:radial-gradient(circle at 90% 15%,#67419a55,transparent 40%),linear-gradient(130deg,#241637,#171126 65%);border-color:#594078}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:800}.player-row{display:flex;align-items:center;gap:16px;margin:12px 0}.avatar{width:86px;height:86px;flex:0 0 86px;border-radius:22px;background:linear-gradient(145deg,#3d2a59,#211735);border:1px solid #8060a8;display:grid;place-items:center;font-size:38px}.player-row h2{margin:0 0 4px;font-size:23px}.rank{color:var(--lav);font-size:13px}.xp-line{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin:12px 0 7px}.progress{height:11px;border-radius:99px;background:#342744;overflow:hidden;border:1px solid #49355f}.progress div{height:100%;width:0;background:linear-gradient(90deg,#8756ce,#d3b1ff);border-radius:99px;transition:width .25s}.hero-side{display:grid;grid-template-columns:1fr 1fr;gap:10px}.statbox{background:#211735;border:1px solid var(--line);border-radius:17px;padding:15px;display:flex;flex-direction:column;justify-content:center;min-height:105px}.statbox .symbol{font-size:20px}.statbox strong{font-size:25px;color:var(--lav);margin:5px 0}.statbox span:last-child{font-size:12px;color:var(--muted)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px}.section-head h2{font-size:18px;margin:0}.subtle{color:var(--muted);font-size:13px}.layout{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.task{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #302440}.task:last-child{border-bottom:0}.task input{accent-color:var(--purple);width:19px;height:19px}.task-name{flex:1;font-weight:600;font-size:14px}.reward{color:var(--gold);font-size:12px;font-weight:800;white-space:nowrap}.mission-input{display:flex;gap:8px;margin-top:12px}.mission-input input{flex:1;min-width:0}.mission-input .field{margin:0}.nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.nav button{background:#1a1327;color:var(--muted);border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-weight:700}.nav button.active{background:#392454;color:#fff;border-color:#9367cf}.view{display:none}.view.active{display:block}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.day{min-height:52px;border:1px solid var(--line);border-radius:10px;background:#1a1327;padding:7px;text-align:center;font-size:12px;color:var(--muted)}.day.done{border-color:#7c58b1;background:#35224c;color:#fff}.day.today{outline:2px solid var(--gold);outline-offset:1px}.summary-list{display:grid;gap:8px}.summary-item{display:flex;justify-content:space-between;background:#211735;border-radius:12px;padding:11px 13px;font-size:13px}.skill-card{background:#211735;border:1px solid var(--line);border-radius:15px;padding:14px;margin:12px 0}.skill-top{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:14px}.skill-rank{font-size:11px;color:var(--gold);margin-top:5px}.skill-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin:9px 0 6px}.skill-card .progress{height:9px}.badges{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.achievement{border:1px solid var(--line);border-radius:15px;padding:13px;background:#1b142a;position:relative;overflow:hidden}.achievement.unlocked{box-shadow:0 0 18px #a879f522}.achievement .medal{font-size:27px}.achievement strong{display:block;margin:6px 0;font-size:13px}.achievement span{font-size:11px;color:var(--muted);display:block}.achievement .rarity{font-weight:800;letter-spacing:1px;margin-top:8px}.achievement.locked{opacity:.55;filter:saturate(.5)}.rarity-plata{color:#c5cedb}.rarity-oro{color:#f1cc62}.rarity-platino{color:#b6e1f3}.rarity-diamante{color:#64c9ff}.rarity-rubi{color:#ff6689}.achievement.unlocked:after{content:"✓";position:absolute;right:12px;top:10px;color:var(--green);font-weight:900}.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#2a1d3c;border:1px solid #a879f5;color:white;padding:13px 18px;border-radius:14px;box-shadow:0 8px 30px #0008;z-index:20;text-align:center;max-width:90%;animation:pop .35s ease}.toast strong{color:var(--gold)}@keyframes pop{from{opacity:0;transform:translate(-50%,12px) scale(.96)}to{opacity:1;transform:translate(-50%,0) scale(1)}}footer{text-align:center;color:#887b9d;font-size:11px;margin-top:28px}@media(max-width:720px){.app{padding:13px 12px 95px}.hero{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.hero-side{grid-template-columns:repeat(4,1fr)}.statbox{min-height:90px;padding:10px}.statbox strong{font-size:20px}.brand h1{font-size:17px}.pill{display:none}.nav{display:grid;grid-template-columns:repeat(3,1fr)}.nav button{font-size:12px;padding:10px 5px}.badges{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 <main class="app">
-  <header class="topbar">
-    <div class="brand"><div class="brand-mark">✦</div><div><h1>MI RACHA</h1><p>TU AVENTURA, TU PROGRESO</p></div></div>
-    <div class="top-actions"><span class="pill">✧ RPG HYBRID</span><button class="btn secondary" id="logout" hidden>Cerrar sesión</button></div>
-  </header>
-
-  <section id="login" class="panel login">
-    <div class="eyebrow">Bienvenido, aventurero</div>
-    <h2>Entra a tu aventura</h2>
-    <p class="subtle">Tu progreso te espera. Inicia sesión o crea tu cuenta.</p>
-    <input class="field" id="email" type="email" placeholder="Correo electrónico" autocomplete="email">
-    <input class="field" id="password" type="password" placeholder="Contraseña" autocomplete="current-password">
-    <button class="btn" id="register">Crear cuenta</button>
-    <button class="btn secondary" id="signin">Iniciar sesión</button>
-    <p id="message" class="message"></p>
-  </section>
-
-  <section id="game" class="hidden">
-    <div class="hero">
-      <div class="panel hero-main">
-        <div class="eyebrow">Panel del aventurero</div>
-        <div class="player-row">
-          <div class="avatar" aria-label="Espacio reservado para tu personaje">♙</div>
-          <div><h2>Tu personaje</h2><div class="rank" id="rank">Rango: Novato</div><p class="subtle" style="margin:7px 0 0">Cada pequeño avance cuenta.</p></div>
-        </div>
-        <div class="xp-line"><span id="levelLabel">NIVEL 1</span><span id="next">0 / 100 XP</span></div>
-        <div class="progress"><div id="bar"></div></div>
-      </div>
-      <div class="hero-side">
-        <div class="statbox"><span class="symbol">⚡</span><strong id="xp">0</strong><span>Experiencia total</span></div>
-        <div class="statbox"><span class="symbol">🔥</span><strong id="streak">0</strong><span>Días de racha</span></div>
-        <div class="statbox"><span class="symbol">📜</span><strong id="done">0</strong><span>Misiones de hoy</span></div>
-        <div class="statbox"><span class="symbol">🏅</span><strong id="achievementCount">0</strong><span>Logros desbloqueados</span></div>
-      </div>
-    </div>
-
-    <nav class="nav" aria-label="Secciones de Mi Racha">
-      <button class="active" data-view="home">⌂ Inicio</button>
-      <button data-view="missionsView">⚔ Misiones</button>
-      <button data-view="characterView">♙ Personaje</button>
-      <button data-view="skillsView">✧ Habilidades</button>
-      <button data-view="calendarView">▦ Calendario</button>
-      <button data-view="achievementsView">🏅 Logros</button>
-    </nav>
-
-    <section class="view active" id="home">
-      <div class="layout">
-        <div class="panel">
-          <div class="section-head"><h2>✦ Misiones de hoy</h2><span class="eyebrow" id="date"></span></div>
-          <p class="subtle">Completa tus actividades y gana experiencia.</p>
-          <div id="habits"></div>
-        </div>
-        <div class="panel">
-          <div class="section-head"><h2>Resumen diario</h2></div>
-          <div class="summary-list">
-            <div class="summary-item"><span>Actividades completadas</span><strong id="homeDone">0</strong></div>
-            <div class="summary-item"><span>XP ganados hoy</span><strong id="todayXP">0</strong></div>
-            <div class="summary-item"><span>Misiones especiales</span><strong id="missionCount">0</strong></div>
-          </div>
-          <p class="subtle" style="margin-top:16px">Consejo: la constancia vale más que hacerlo todo perfecto.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="view" id="missionsView">
-      <div class="panel">
-        <div class="section-head"><h2>⚔ Misiones especiales</h2><span class="eyebrow">+20 XP</span></div>
-        <p class="subtle">Añade desafíos personales seguros y realistas.</p>
-        <div id="missions"></div>
-        <div class="mission-input"><input class="field" id="newMission" placeholder="Escribe una misión nueva"><button class="btn" id="addMission">Añadir</button></div>
-      </div>
-    </section>
-
-    <section class="view" id="characterView">
-      <div class="panel">
-        <div class="eyebrow">Ficha del personaje</div>
-        <div class="player-row"><div class="avatar" style="width:110px;height:110px;font-size:48px">♙</div><div><h2>Tu aventurero</h2><div class="rank" id="characterRank">Novato · Nivel 1</div><p class="subtle">Aquí colocaremos tu personaje dibujado cuando esté listo.</p></div></div>
-        <div class="summary-list"><div class="summary-item"><span>Experiencia acumulada</span><strong id="characterXP">0 XP</strong></div><div class="summary-item"><span>Racha actual</span><strong id="characterStreak">0 días</strong></div></div>
-      </div>
-    </section>
-
-    <section class="view" id="skillsView">
-      <div class="panel">
-        <div class="section-head"><h2>✧ Árbol de habilidades</h2></div>
-        <p class="subtle">Estas áreas se desarrollan con tus actividades. El avance mostrado se calcula con las tareas completadas en tu historial.</p>
-        <div id="skills"></div>
-      </div>
-    </section>
-
-    <section class="view" id="calendarView">
-      <div class="panel">
-        <div class="section-head"><h2>▦ Calendario de progreso</h2><span class="subtle">Últimos 35 días</span></div>
-        <div class="calendar" id="calendar"></div>
-        <p class="subtle">Los días marcados indican que completaste todas tus actividades registradas para ese día.</p>
-      </div>
-    </section>
-
-    <section class="view" id="achievementsView">
-      <div class="panel">
-        <div class="section-head"><h2>🏅 Sala de logros</h2></div>
-        <div class="badges" id="achievements"></div>
-      </div>
-    </section>
-  </section>
-  <footer>MI RACHA · Construye tu progreso, una misión a la vez.</footer>
-</main>
-
+<header class="topbar"><div class="brand"><div class="brand-mark">✦</div><div><h1>MI RACHA</h1><p>TU AVENTURA, TU PROGRESO</p></div></div><div class="top-actions"><span class="pill">✧ RPG HYBRID</span><button class="btn secondary" id="logout" hidden>Cerrar sesión</button></div></header>
+<section id="login" class="panel login"><div class="eyebrow">Bienvenido, aventurero</div><h2>Entra a tu aventura</h2><p class="subtle">Tu progreso te espera. Inicia sesión o crea tu cuenta.</p><input class="field" id="email" type="email" placeholder="Correo electrónico" autocomplete="email"><input class="field" id="password" type="password" placeholder="Contraseña" autocomplete="current-password"><button class="btn" id="register">Crear cuenta</button> <button class="btn secondary" id="signin">Iniciar sesión</button><p id="message" class="message"></p></section>
+<section id="game" class="hidden">
+<div class="hero"><div class="panel hero-main"><div class="eyebrow">Panel del aventurero</div><div class="player-row"><div class="avatar">♙</div><div><h2>Tu personaje</h2><div class="rank" id="rank">Rango: Novato</div><p class="subtle" style="margin:7px 0 0">Cada pequeño avance cuenta.</p></div></div><div class="xp-line"><span id="levelLabel">NIVEL 1</span><span id="next">0 / 100 XP</span></div><div class="progress"><div id="bar"></div></div></div><div class="hero-side"><div class="statbox"><span class="symbol">⚡</span><strong id="xp">0</strong><span>Experiencia total</span></div><div class="statbox"><span class="symbol">🔥</span><strong id="streak">0</strong><span>Días de racha</span></div><div class="statbox"><span class="symbol">📜</span><strong id="done">0</strong><span>Misiones de hoy</span></div><div class="statbox"><span class="symbol">🏅</span><strong id="achievementCount">0</strong><span>Logros desbloqueados</span></div></div></div>
+<nav class="nav"><button class="active" data-view="home">⌂ Inicio</button><button data-view="missionsView">⚔ Misiones</button><button data-view="characterView">♙ Personaje</button><button data-view="skillsView">✧ Habilidades</button><button data-view="calendarView">▦ Calendario</button><button data-view="achievementsView">🏅 Logros</button></nav>
+<section class="view active" id="home"><div class="layout"><div class="panel"><div class="section-head"><h2>✦ Misiones de hoy</h2><span class="eyebrow" id="date"></span></div><p class="subtle">Completa tus actividades y gana experiencia.</p><div id="habits"></div></div><div class="panel"><div class="section-head"><h2>Resumen diario</h2></div><div class="summary-list"><div class="summary-item"><span>Actividades completadas</span><strong id="homeDone">0</strong></div><div class="summary-item"><span>XP ganados hoy</span><strong id="todayXP">0</strong></div><div class="summary-item"><span>Misiones especiales</span><strong id="missionCount">0</strong></div></div><p class="subtle" style="margin-top:16px">La constancia vale más que hacerlo todo perfecto.</p></div></div></section>
+<section class="view" id="missionsView"><div class="panel"><div class="section-head"><h2>⚔ Misiones especiales</h2><span class="eyebrow">+20 XP</span></div><p class="subtle">Añade desafíos personales seguros y realistas.</p><div id="missions"></div><div class="mission-input"><input class="field" id="newMission" placeholder="Escribe una misión nueva"><button class="btn" id="addMission">Añadir</button></div></div></section>
+<section class="view" id="characterView"><div class="panel"><div class="eyebrow">Ficha del personaje</div><div class="player-row"><div class="avatar" style="width:110px;height:110px;font-size:48px">♙</div><div><h2>Tu aventurero</h2><div class="rank" id="characterRank">Novato · Nivel 1</div><p class="subtle">Aquí colocaremos tu personaje dibujado cuando esté listo.</p></div></div><div class="summary-list"><div class="summary-item"><span>Experiencia acumulada</span><strong id="characterXP">0 XP</strong></div><div class="summary-item"><span>Racha actual</span><strong id="characterStreak">0 días</strong></div></div></div></section>
+<section class="view" id="skillsView"><div class="panel"><div class="section-head"><h2>✧ Árbol de habilidades</h2><span class="eyebrow">Progreso individual</span></div><p class="subtle">Cada actividad suma 10 XP a su habilidad. Cada 100 XP subes un nivel; el rango de cada habilidad es independiente del personaje.</p><div id="skills"></div></div></section>
+<section class="view" id="calendarView"><div class="panel"><div class="section-head"><h2>▦ Calendario de progreso</h2><span class="subtle">Últimos 35 días</span></div><div class="calendar" id="calendar"></div><p class="subtle">Los días marcados indican que completaste todas tus actividades registradas para ese día.</p></div></section>
+<section class="view" id="achievementsView"><div class="panel"><div class="section-head"><h2>🏆 Sala de logros</h2><span class="eyebrow" id="achievementSummary">Colección</span></div><p class="subtle">Cada colección tiene cinco etapas. Los logros se desbloquean con tu progreso real y entregan XP una sola vez.</p><div class="badges" id="achievements"></div></div></section>
+</section><footer>MI RACHA · Construye tu progreso, una misión a la vez.</footer>
+</main><div id="toastRoot"></div>
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 import {getFirestore,doc,getDoc,setDoc} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCUkNVRuVtfxrbYheFufzoXdFuFWxP-M_Q",
-  authDomain: "mi-racha-8a483.firebaseapp.com",
-  projectId: "mi-racha-8a483",
-  storageBucket: "mi-racha-8a483.firebasestorage.app",
-  messagingSenderId: "522890851815",
-  appId: "1:522890851815:web:7d14c4c2e0265f2fd9b942"
-};
+const firebaseConfig={apiKey:"AIzaSyCUkNVRuVtfxrbYheFufzoXdFuFWxP-M_Q",authDomain:"mi-racha-8a483.firebaseapp.com",projectId:"mi-racha-8a483",storageBucket:"mi-racha-8a483.firebasestorage.app",messagingSenderId:"522890851815",appId:"1:522890851815:web:7d14c4c2e0265f2fd9b942"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
 const defaults=["Leer durante 10 minutos","Practicar inglés","Aprender algo nuevo","Practicar programación","Hablar o comunicarme con alguien"];
+const skillGroups=[{name:"Lectura",habit:"Leer durante 10 minutos",icon:"📚"},{name:"Inglés",habit:"Practicar inglés",icon:"🌎"},{name:"Aprendizaje",habit:"Aprender algo nuevo",icon:"🧠"},{name:"Programación",habit:"Practicar programación",icon:"💻"},{name:"Comunicación",habit:"Hablar o comunicarme con alguien",icon:"💬"}];
+const rarities=[{name:"Plata",className:"plata",emoji:"🥈",reward:20},{name:"Oro",className:"oro",emoji:"🥇",reward:50},{name:"Platino",className:"platino",emoji:"🏅",reward:100},{name:"Diamante",className:"diamante",emoji:"💎",reward:200},{name:"Rubí",className:"rubi",emoji:"♦️",reward:400}];
+const thresholds=[7,30,100,250,365];
 let user=null,data=null;
-let today=new Date().toLocaleDateString("en-CA");
 const $=id=>document.getElementById(id);
+let today=localDateKey(new Date());
+function localDateKey(date){const y=date.getFullYear(),m=String(date.getMonth()+1).padStart(2,"0"),d=String(date.getDate()).padStart(2,"0");return `${y}-${m}-${d}`}
 $("date").textContent=new Date().toLocaleDateString("es-ES",{weekday:"short",day:"numeric",month:"short"});
 function docRef(){return doc(db,"users",user.uid,"app","data")}
-function newData(){return {xp:0,streak:0,lastDay:"",days:{},habits:defaults,missions:[]}}
-function todayData(){if(!data.days[today])data.days[today]={habits:{},missions:[],xp:0};return data.days[today]}
-async function save(){await setDoc(docRef(),data);render()}
-function rankFor(level){if(level>=30)return "Leyenda";if(level>=20)return "Élite";if(level>=10)return "Aventurero";if(level>=5)return "Explorador";return "Novato"}
+function newData(){return {xp:0,streak:0,lastDay:"",days:{},habits:defaults,missions:[],achievementUnlocks:{}}}
+function todayData(){if(!data.days[today])data.days[today]={habits:{},missions:[],xp:0};if(!data.days[today].missions)data.days[today].missions=[];return data.days[today]}
 function allDays(){return Object.entries(data.days||{}).sort((a,b)=>a[0].localeCompare(b[0]))}
+function habitCount(habit){let n=0;allDays().forEach(([key,day])=>(data.habits||defaults).forEach((h,i)=>{if(h===habit&&day.habits&&day.habits[i])n++}));return n}
+function totalCompleted(){return allDays().reduce((n,[key,day])=>n+Object.values(day.habits||{}).filter(Boolean).length+(day.missions||[]).filter(m=>m.done).length,0)}
+function rankForLevel(level){if(level>=76)return "Leyenda";if(level>=51)return "Élite";if(level>=36)return "Maestro";if(level>=21)return "Experto";if(level>=11)return "Adepto";if(level>=6)return "Aprendiz";return "Novato"}
+function skillXP(habit){return habitCount(habit)*10}
+function achievementDefinitions(){
+ const defs=[];
+ skillGroups.forEach(group=>thresholds.forEach((goal,i)=>defs.push({id:`${group.name}-${i+1}`,name:`${group.name} ${["I","II","III","IV","V"][i]}`,desc:`Completa ${goal} actividades de ${group.name.toLowerCase()}.`,ok:habitCount(group.habit)>=goal,rarity:rarities[i],icon:group.icon})));
+ const missionDone=allDays().reduce((n,[k,d])=>n+(d.missions||[]).filter(m=>m.done).length,0);
+ thresholds.forEach((goal,i)=>defs.push({id:`Misiones-${i+1}`,name:`Aventurero ${["I","II","III","IV","V"][i]}`,desc:`Completa ${goal} misiones especiales.`,ok:missionDone>=goal,rarity:rarities[i],icon:"⚔️"}));
+ const fullDays=allDays().filter(([k,d])=>{const habits=(data.habits||defaults).length;return habits>0&&(data.habits||defaults).every((h,i)=>!!(d.habits&&d.habits[i]))}).length;
+ [1,3,7,15,30].forEach((goal,i)=>defs.push({id:`Constancia-${i+1}`,name:`Constancia ${["I","II","III","IV","V"][i]}`,desc:`Completa todas tus actividades en ${goal} días.`,ok:fullDays>=goal,rarity:rarities[i],icon:"🔥"}));
+ return defs;
+}
+function syncAchievements(){
+ if(!data.achievementUnlocks)data.achievementUnlocks={};
+ let earned=0;
+ achievementDefinitions().forEach(a=>{if(a.ok&&!data.achievementUnlocks[a.id]){data.achievementUnlocks[a.id]=new Date().toISOString();data.xp=(data.xp||0)+a.rarity.reward;earned++;}});
+ if(earned)showToast(`¡${earned} logro(s) desbloqueado(s)! XP de recompensa añadido.`);
+}
+function showToast(message){const root=$("toastRoot");root.innerHTML="";const el=document.createElement("div");el.className="toast";el.textContent=message;root.append(el);setTimeout(()=>{if(el.parentNode)el.remove()},3600)}
+async function save(){syncAchievements();await setDoc(docRef(),data);render()}
 function render(){
- if(!data)return;
- const d=todayData(),level=Math.floor((data.xp||0)/100)+1,rank=rankFor(level);
+ if(!data)return;const d=todayData(),level=Math.floor((data.xp||0)/100)+1,rank=rankForLevel(level);
  const completed=Object.values(d.habits||{}).filter(Boolean).length+(d.missions||[]).filter(m=>m.done).length;
- $("levelLabel").textContent="NIVEL "+level;$("rank").textContent="Rango: "+rank;
- $("xp").textContent=data.xp||0;$("bar").style.width=((data.xp||0)%100)+"%";
- $("next").textContent=((data.xp||0)%100)+" / 100 XP";
- $("streak").textContent=data.streak||0;$("done").textContent=completed;
- $("homeDone").textContent=completed;$("todayXP").textContent=d.xp||0;
- $("missionCount").textContent=(d.missions||[]).length;
- $("characterRank").textContent=rank+" · Nivel "+level;
- $("characterXP").textContent=(data.xp||0)+" XP";$("characterStreak").textContent=(data.streak||0)+" días";
- const earned=achievementList().filter(a=>a.ok).length;$("achievementCount").textContent=earned;
-
+ $("levelLabel").textContent="NIVEL "+level;$("rank").textContent="Rango: "+rank;$("xp").textContent=data.xp||0;$("bar").style.width=((data.xp||0)%100)+"%";$("next").textContent=((data.xp||0)%100)+" / 100 XP";
+ $("streak").textContent=data.streak||0;$("done").textContent=completed;$("homeDone").textContent=completed;$("todayXP").textContent=d.xp||0;$("missionCount").textContent=(d.missions||[]).length;
+ $("characterRank").textContent=rank+" · Nivel "+level;$("characterXP").textContent=(data.xp||0)+" XP";$("characterStreak").textContent=(data.streak||0)+" días";
+ $("achievementCount").textContent=Object.keys(data.achievementUnlocks||{}).length;
  $("habits").innerHTML="";
- (data.habits||defaults).forEach((name,i)=>{
-  const label=document.createElement("label");label.className="task";
-  const check=document.createElement("input");check.type="checkbox";check.checked=!!d.habits[i];
-  check.addEventListener("change",async()=>{d.habits[i]=check.checked;const delta=check.checked?10:-10;data.xp=Math.max(0,(data.xp||0)+delta);d.xp=Math.max(0,(d.xp||0)+delta);updateStreak();await save()});
-  const text=document.createElement("span");text.className="task-name";text.textContent=name;
-  const reward=document.createElement("span");reward.className="reward";reward.textContent="+10 XP";
-  label.append(check,text,reward);$("habits").append(label);
- });
- $("missions").innerHTML="";
- (d.missions||[]).forEach((m,i)=>{
-  const label=document.createElement("label");label.className="task";
-  const check=document.createElement("input");check.type="checkbox";check.checked=!!m.done;
-  check.addEventListener("change",async()=>{m.done=check.checked;const delta=check.checked?20:-20;data.xp=Math.max(0,(data.xp||0)+delta);d.xp=Math.max(0,(d.xp||0)+delta);updateStreak();await save()});
-  const text=document.createElement("span");text.className="task-name";text.textContent=m.name;
-  const reward=document.createElement("span");reward.className="reward";reward.textContent="+20 XP";
-  label.append(check,text,reward);$("missions").append(label);
- });
+ (data.habits||defaults).forEach((name,i)=>{const label=document.createElement("label");label.className="task";const check=document.createElement("input");check.type="checkbox";check.checked=!!d.habits[i];check.addEventListener("change",async()=>{d.habits[i]=check.checked;const delta=check.checked?10:-10;data.xp=Math.max(0,(data.xp||0)+delta);d.xp=Math.max(0,(d.xp||0)+delta);updateStreak();await save()});const text=document.createElement("span");text.className="task-name";text.textContent=name;const reward=document.createElement("span");reward.className="reward";reward.textContent="+10 XP";label.append(check,text,reward);$("habits").append(label)});
+ $("missions").innerHTML="";(d.missions||[]).forEach(m=>{const label=document.createElement("label");label.className="task";const check=document.createElement("input");check.type="checkbox";check.checked=!!m.done;check.addEventListener("change",async()=>{m.done=check.checked;const delta=check.checked?20:-20;data.xp=Math.max(0,(data.xp||0)+delta);d.xp=Math.max(0,(d.xp||0)+delta);updateStreak();await save()});const text=document.createElement("span");text.className="task-name";text.textContent=m.name;const reward=document.createElement("span");reward.className="reward";reward.textContent="+20 XP";label.append(check,text,reward);$("missions").append(label)});
  renderSkills();renderCalendar();renderAchievements();
 }
-function updateStreak(){
- const d=todayData(),total=(data.habits||defaults).length+(d.missions||[]).length;
- const done=Object.values(d.habits||{}).filter(Boolean).length+(d.missions||[]).filter(m=>m.done).length;
- if(done===total&&total>0&&data.lastDay!==today){
-  const yday=new Date();yday.setDate(yday.getDate()-1);
-  const y=yday.toLocaleDateString("en-CA");
-  data.streak=data.lastDay===y?(data.streak||0)+1:1;data.lastDay=today;
- }
-}
+function updateStreak(){const d=todayData(),total=(data.habits||defaults).length+(d.missions||[]).length,done=Object.values(d.habits||{}).filter(Boolean).length+(d.missions||[]).filter(m=>m.done).length;if(done===total&&total>0&&data.lastDay!==today){const yday=new Date();yday.setDate(yday.getDate()-1);const y=localDateKey(yday);data.streak=data.lastDay===y?(data.streak||0)+1:1;data.lastDay=today}}
 function renderSkills(){
- const groups=[["Lectura",["Leer durante 10 minutos"]],["Inglés",["Practicar inglés"]],["Aprendizaje",["Aprender algo nuevo"]],["Programación",["Practicar programación"]],["Comunicación",["Hablar o comunicarme con alguien"]]];
  $("skills").innerHTML="";
- groups.forEach(([name,terms])=>{
-  let total=0,done=0;
-  allDays().forEach(([date,day])=>{(data.habits||defaults).forEach((habit,i)=>{if(terms.includes(habit)){total++;if(day.habits&&day.habits[i])done++}})});
-  const pct=total?Math.round(done/total*100):0;
-  const wrap=document.createElement("div");wrap.className="skill";
-  const top=document.createElement("div");top.className="skill-top";
-  const left=document.createElement("strong");left.textContent=name;
-  const right=document.createElement("span");right.className="subtle";right.textContent=done+" / "+total+" · "+pct+"%";
-  top.append(left,right);const bar=document.createElement("div");bar.className="progress";const fill=document.createElement("div");fill.style.width=pct+"%";bar.append(fill);wrap.append(top,bar);$("skills").append(wrap);
- });
+ skillGroups.forEach(group=>{const xp=skillXP(group.habit),level=Math.floor(xp/100)+1,progress=xp%100,rank=rankForLevel(level),card=document.createElement("div");card.className="skill-card";
+ const top=document.createElement("div");top.className="skill-top";const name=document.createElement("strong");name.textContent=`${group.icon} ${group.name}`;const lv=document.createElement("strong");lv.textContent=`Nivel ${level}`;top.append(name,lv);
+ const rankLabel=document.createElement("div");rankLabel.className="skill-rank";rankLabel.textContent=`Rango: ${rankForLevel(level)}`;
+ const meta=document.createElement("div");meta.className="skill-meta";const left=document.createElement("span");left.textContent=`${xp} XP acumulados`;const right=document.createElement("span");right.textContent=`${progress} / 100 XP`;meta.append(left,right);
+ const bar=document.createElement("div");bar.className="progress";const fill=document.createElement("div");fill.style.width=progress+"%";bar.append(fill);card.append(top,rankLabel,meta,bar);$("skills").append(card)});
 }
-function renderCalendar(){
- const root=$("calendar");root.innerHTML="";
- ["D","L","M","X","J","V","S"].forEach(x=>{const e=document.createElement("div");e.className="day";e.textContent=x;e.style.minHeight="auto";e.style.fontWeight="800";root.append(e)});
- const start=new Date();start.setDate(start.getDate()-34);
- for(let i=0;i<35;i++){
-  const dt=new Date(start);dt.setDate(start.getDate()+i);const key=dt.toLocaleDateString("en-CA"),day=data.days[key];
-  const el=document.createElement("div");el.className="day";el.textContent=dt.getDate();
-  if(key===today)el.classList.add("today");
-  if(day){const total=(day.habits?Object.keys(day.habits).length:0)+(day.missions||[]).length;const done=Object.values(day.habits||{}).filter(Boolean).length+(day.missions||[]).filter(m=>m.done).length;if(total>0&&done===total)el.classList.add("done")}
-  root.append(el);
- }
-}
-function achievementList(){
- const completed=allDays().reduce((n,[k,d])=>n+Object.values(d.habits||{}).filter(Boolean).length+(d.missions||[]).filter(m=>m.done).length,0);
- return [
-  {icon:"🌱",name:"Primer paso",desc:"Completa tu primera actividad.",ok:completed>=1},
-  {icon:"📚",name:"Lector constante",desc:"Completa 5 actividades.",ok:completed>=5},
-  {icon:"⚡",name:"En movimiento",desc:"Alcanza 100 XP.",ok:(data.xp||0)>=100},
-  {icon:"🔥",name:"Racha inicial",desc:"Consigue 3 días de racha.",ok:(data.streak||0)>=3},
-  {icon:"🧠",name:"Aprendiz",desc:"Alcanza 500 XP.",ok:(data.xp||0)>=500},
-  {icon:"👑",name:"Leyenda en marcha",desc:"Alcanza el nivel 10.",ok:Math.floor((data.xp||0)/100)+1>=10}
- ];
-}
+function renderCalendar(){const root=$("calendar");root.innerHTML="";["D","L","M","X","J","V","S"].forEach(x=>{const e=document.createElement("div");e.className="day";e.textContent=x;e.style.minHeight="auto";e.style.fontWeight="800";root.append(e)});const start=new Date();start.setDate(start.getDate()-34);for(let i=0;i<35;i++){const dt=new Date(start);dt.setDate(start.getDate()+i);const key=localDateKey(dt),day=data.days[key],el=document.createElement("div");el.className="day";el.textContent=dt.getDate();if(key===today)el.classList.add("today");if(day){const total=(data.habits||defaults).length+(day.missions||[]).length,done=Object.values(day.habits||{}).filter(Boolean).length+(day.missions||[]).filter(m=>m.done).length;if(total>0&&done===total)el.classList.add("done")}root.append(el)}}
 function renderAchievements(){
- const root=$("achievements");root.innerHTML="";
- achievementList().forEach(a=>{const el=document.createElement("div");el.className="achievement";el.style.opacity=a.ok?"1":".55";const icon=document.createElement("div");icon.className="medal";icon.textContent=a.icon;const name=document.createElement("strong");name.textContent=a.name+(a.ok?" ✓":"");const desc=document.createElement("span");desc.textContent=a.desc;el.append(icon,name,desc);root.append(el)});
+ const root=$("achievements");root.innerHTML="";const defs=achievementDefinitions();let unlocked=0;
+ defs.forEach(a=>{const isUnlocked=!!(data.achievementUnlocks&&data.achievementUnlocks[a.id]);if(isUnlocked)unlocked++;const el=document.createElement("div");el.className="achievement "+(isUnlocked?"unlocked":"locked");const icon=document.createElement("div");icon.className="medal";icon.textContent=a.rarity.emoji+" "+a.icon;const name=document.createElement("strong");name.textContent=a.name;const desc=document.createElement("span");desc.textContent=a.desc;const rarity=document.createElement("span");rarity.className="rarity rarity-"+a.rarity.className;rarity.textContent=`${a.rarity.name} · +${a.rarity.reward} XP`;const status=document.createElement("span");status.textContent=isUnlocked?"Desbloqueado":"Bloqueado";el.append(icon,name,desc,rarity,status);root.append(el)});
+ $("achievementSummary").textContent=`${unlocked} / ${defs.length} desbloqueados`;
 }
-document.querySelectorAll(".nav button").forEach(btn=>btn.addEventListener("click",()=>{
- document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b===btn));
- document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===btn.dataset.view));
-}));
+document.querySelectorAll(".nav button").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b===btn));document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===btn.dataset.view))}));
 $("register").onclick=async()=>{try{await createUserWithEmailAndPassword(auth,$("email").value,$("password").value)}catch(e){$("message").textContent=e.message}};
 $("signin").onclick=async()=>{try{await signInWithEmailAndPassword(auth,$("email").value,$("password").value)}catch(e){$("message").textContent=e.message}};
 $("logout").onclick=()=>signOut(auth);
 $("addMission").onclick=async()=>{const name=$("newMission").value.trim();if(!name)return;todayData().missions.push({name,done:false});$("newMission").value="";await save()};
-onAuthStateChanged(auth,async current=>{
- user=current;$("login").classList.toggle("hidden",!!user);$("game").classList.toggle("hidden",!user);$("logout").hidden=!user;
- if(!user)return;
- try{const snap=await getDoc(docRef());data=snap.exists()?snap.data():newData();if(!data.days)data.days={};if(!data.habits)data.habits=defaults;if(!data.missions)data.missions=[];todayData();await save()}
- catch(e){$("message").textContent="Error al cargar datos: "+e.message}
-});
+onAuthStateChanged(auth,async current=>{user=current;$("login").classList.toggle("hidden",!!user);$("game").classList.toggle("hidden",!user);$("logout").hidden=!user;if(!user)return;try{const snap=await getDoc(docRef());data=snap.exists()?snap.data():newData();if(!data.days)data.days={};if(!data.habits)data.habits=defaults;if(!data.missions)data.missions=[];if(!data.achievementUnlocks)data.achievementUnlocks={};today=localDateKey(new Date());todayData();syncAchievements();await setDoc(docRef(),data);render()}catch(e){$("message").textContent="Error al cargar datos: "+e.message}});
 </script>
 </body>
 </html>
