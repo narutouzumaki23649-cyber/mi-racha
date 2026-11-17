@@ -1,12 +1,253 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Racha</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi Racha</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#10121b;color:#f4f4fa;font-family:Arial,sans-serif}
+main{max-width:760px;margin:auto;padding:22px}
+header{display:flex;justify-content:space-between;align-items:center}
+h1{color:#a78bfa;margin-bottom:5px}
+.muted{color:#9ca3af}
+.card{background:#1b1e2c;border:1px solid #303448;border-radius:16px;padding:18px;margin:16px 0}
+input{background:#10121b;color:white;border:1px solid #444966;border-radius:9px;padding:12px;width:100%;margin:6px 0}
+button{background:#7957e8;color:white;border:0;border-radius:9px;padding:12px 16px;font-weight:bold;margin:5px;cursor:pointer}
+button.secondary{background:#34384d}
+button:disabled{opacity:.5}
+.habit{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #303448}
+.habit input{width:20px;height:20px;margin:0}
+.progress{height:10px;background:#303448;border-radius:20px;overflow:hidden}
+.progress div{height:100%;background:#a78bfa;width:0%;transition:.2s}
+.stat{font-size:25px;font-weight:bold;color:#c4b5fd}
+.hidden{display:none}
+#message{color:#fbbf24}
+</style>
 </head>
 <body>
-    <h1>MI RACHA 🎮</h1>
-    <p>Tu aventura comienza aquí.</p>
+<main>
+<header>
+ <div>
+  <h1>MI RACHA 🎮</h1>
+  <p class="muted">Tu aventura comienza aquí.</p>
+ </div>
+ <button class="secondary" id="logout" hidden>Cerrar sesión</button>
+</header>
+
+<section id="login" class="card">
+ <h2>Entrar a tu aventura</h2>
+ <input id="email" type="email" placeholder="Correo electrónico">
+ <input id="password" type="password" placeholder="Contraseña">
+ <button id="register">Crear cuenta</button>
+ <button id="signin" class="secondary">Iniciar sesión</button>
+ <p id="message"></p>
+</section>
+
+<section id="game" class="hidden">
+ <div class="card">
+  <p class="muted">TU PERSONAJE</p>
+  <h2>⚔️ Aventurero</h2>
+  <div>Nivel <span id="level" class="stat">1</span></div>
+  <p><span id="xp" class="stat">0</span> XP</p>
+  <div class="progress"><div id="bar"></div></div>
+  <p class="muted" id="next">0 / 100 XP para el siguiente nivel</p>
+  <p>🔥 Racha: <b id="streak">0</b> días</p>
+ </div>
+
+ <div class="card">
+  <h2>📜 Actividades diarias</h2>
+  <p class="muted">Completa tus hábitos y gana experiencia.</p>
+  <div id="habits"></div>
+ </div>
+
+ <div class="card">
+  <h2>🗡️ Misiones especiales</h2>
+  <div id="missions"></div>
+  <input id="newMission" placeholder="Escribe una nueva misión">
+  <button id="addMission">Añadir misión</button>
+ </div>
+
+ <div class="card">
+  <h2>📊 Resumen de hoy</h2>
+  <p>Actividades completadas: <b id="done">0</b></p>
+  <p>XP ganados hoy: <b id="todayXP">0</b></p>
+  <p id="date" class="muted"></p>
+ </div>
+</section>
+</main>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import {
+ getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,
+ onAuthStateChanged,signOut
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import {
+ getFirestore,doc,getDoc,setDoc
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+ apiKey: "AIzaSyCUkNVRuVtfxrbYheFufzoXdFuFWxP-M_Q",
+ authDomain: "mi-racha-8a483.firebaseapp.com",
+ projectId: "mi-racha-8a483",
+ storageBucket: "mi-racha-8a483.firebasestorage.app",
+ messagingSenderId: "522890851815",
+ appId: "1:522890851815:web:7d14c4c2e0265f2fd9b942"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const defaults=[
+ "Leer durante 10 minutos",
+ "Practicar inglés",
+ "Aprender algo nuevo",
+ "Practicar programación",
+ "Hablar o comunicarme con alguien"
+];
+
+let user=null,data=null;
+let today=new Date().toLocaleDateString("en-CA");
+
+const $=id=>document.getElementById(id);
+$("date").textContent=new Date().toLocaleDateString("es-ES",{dateStyle:"full"});
+
+function docRef(){
+ return doc(db,"users",user.uid,"app","data");
+}
+
+function newData(){
+ return {
+  xp:0,streak:0,lastDay:"",
+  days:{},
+  habits:defaults,
+  missions:[]
+ };
+}
+
+function todayData(){
+ if(!data.days[today]){
+  data.days[today]={habits:{},missions:[]};
+ }
+ return data.days[today];
+}
+
+async function save(){
+ await setDoc(docRef(),data);
+ render();
+}
+
+function render(){
+ if(!data)return;
+ const d=todayData();
+ const completed=Object.values(d.habits).filter(Boolean).length+
+ d.missions.filter(m=>m.done).length;
+
+ $("level").textContent=Math.floor(data.xp/100)+1;
+ $("xp").textContent=data.xp;
+ $("bar").style.width=(data.xp%100)+"%";
+ $("next").textContent=(data.xp%100)+" / 100 XP para el siguiente nivel";
+ $("streak").textContent=data.streak;
+ $("done").textContent=completed;
+ $("todayXP").textContent=d.xp||0;
+
+ $("habits").innerHTML="";
+ data.habits.forEach((name,i)=>{
+  const label=document.createElement("label");
+  label.className="habit";
+  const check=document.createElement("input");
+  check.type="checkbox";
+  check.checked=!!d.habits[i];
+  check.addEventListener("change",async()=>{
+   d.habits[i]=check.checked;
+   const delta=check.checked?10:-10;
+   data.xp=Math.max(0,data.xp+delta);
+   d.xp=Math.max(0,(d.xp||0)+delta);
+   updateStreak();
+   await save();
+  });
+  const span=document.createElement("span");
+  span.textContent=name;
+  label.append(check,span);
+  $("habits").append(label);
+ });
+
+ $("missions").innerHTML="";
+ d.missions.forEach((m,i)=>{
+  const label=document.createElement("label");
+  label.className="habit";
+  const check=document.createElement("input");
+  check.type="checkbox";
+  check.checked=m.done;
+  check.addEventListener("change",async()=>{
+   m.done=check.checked;
+   const delta=check.checked?20:-20;
+   data.xp=Math.max(0,data.xp+delta);
+   d.xp=Math.max(0,(d.xp||0)+delta);
+   updateStreak();
+   await save();
+  });
+  const span=document.createElement("span");
+  span.textContent=m.name+" (+20 XP)";
+  label.append(check,span);
+  $("missions").append(label);
+ });
+}
+
+function updateStreak(){
+ const d=todayData();
+ const total=data.habits.length+d.missions.length;
+ const completed=Object.values(d.habits).filter(Boolean).length+
+ d.missions.filter(m=>m.done).length;
+ if(completed===total && total>0 && data.lastDay!==today){
+  const yesterday=new Date();
+  yesterday.setDate(yesterday.getDate()-1);
+  const y=yesterday.toLocaleDateString("en-CA");
+  data.streak=data.lastDay===y?data.streak+1:1;
+  data.lastDay=today;
+ }
+}
+
+$("register").onclick=async()=>{
+ try{
+  await createUserWithEmailAndPassword(auth,$("email").value,$("password").value);
+ }catch(e){$("message").textContent=e.message;}
+};
+
+$("signin").onclick=async()=>{
+ try{
+  await signInWithEmailAndPassword(auth,$("email").value,$("password").value);
+ }catch(e){$("message").textContent=e.message;}
+};
+
+$("logout").onclick=()=>signOut(auth);
+
+$("addMission").onclick=async()=>{
+ const name=$("newMission").value.trim();
+ if(!name)return;
+ todayData().missions.push({name,done:false});
+ $("newMission").value="";
+ await save();
+};
+
+onAuthStateChanged(auth,async current=>{
+ user=current;
+ $("login").classList.toggle("hidden",!!user);
+ $("game").classList.toggle("hidden",!user);
+ $("logout").hidden=!user;
+ if(!user)return;
+ try{
+  const snap=await getDoc(docRef());
+  data=snap.exists()?snap.data():newData();
+  todayData();
+  await save();
+ }catch(e){
+  $("message").textContent="Error al cargar datos: "+e.message;
+ }
+});
+</script>
 </body>
 </html>
