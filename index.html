@@ -8,6 +8,23 @@
 <style>
 :root{--bg:#0d0916;--panel:#171126;--panel2:#211735;--line:#38284f;--purple:#a879f5;--lav:#d9c5ff;--gold:#e8c878;--text:#f7f1ff;--muted:#b5a8c9;--green:#75d6a0}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#25163c 0%,var(--bg) 48%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;min-height:100vh}button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}.app{max-width:1120px;margin:auto;padding:18px 18px 100px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:46px;height:46px;border:1px solid #7652a7;border-radius:15px;background:linear-gradient(145deg,#3a2359,#171126);display:grid;place-items:center;font-size:24px}.brand h1{font-size:20px;letter-spacing:2px;margin:0;color:var(--lav)}.brand p{margin:3px 0 0;color:var(--muted);font-size:12px}.top-actions{display:flex;align-items:center;gap:8px}.pill{border:1px solid var(--line);background:#1b1428;color:var(--gold);padding:8px 12px;border-radius:99px;font-size:12px;font-weight:700}.btn{border:1px solid #8b63c8;background:linear-gradient(135deg,#8b5bd2,#633ca5);color:white;border-radius:12px;padding:11px 15px;font-weight:700}.btn.secondary{background:#2a203a;border-color:#4c3a67;color:var(--lav)}.panel{background:linear-gradient(145deg,#1b142b,#151020);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 12px 32px #0003}.login{max-width:440px;margin:8vh auto}.login h2{margin-top:0}.field{width:100%;padding:13px 14px;background:#0f0b18;border:1px solid #4b3b62;border-radius:12px;color:white;margin:7px 0}.message{color:var(--gold);min-height:22px;font-size:13px}.hero{display:grid;grid-template-columns:1.4fr .9fr;gap:16px;margin-bottom:16px}.hero-main{background:radial-gradient(circle at 90% 15%,#67419a55,transparent 40%),linear-gradient(130deg,#241637,#171126 65%);border-color:#594078}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:800}.player-row{display:flex;align-items:center;gap:16px;margin:12px 0}.avatar{width:86px;height:86px;flex:0 0 86px;border-radius:22px;background:linear-gradient(145deg,#3d2a59,#211735);border:1px solid #8060a8;display:grid;place-items:center;font-size:38px}.player-row h2{margin:0 0 4px;font-size:23px}.rank{color:var(--lav);font-size:13px}.xp-line{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin:12px 0 7px}.progress{height:11px;border-radius:99px;background:#342744;overflow:hidden;border:1px solid #49355f}.progress div{height:100%;width:0;background:linear-gradient(90deg,#8756ce,#d3b1ff);border-radius:99px;transition:width .25s}.hero-side{display:grid;grid-template-columns:1fr 1fr;gap:10px}.statbox{background:#211735;border:1px solid var(--line);border-radius:17px;padding:15px;display:flex;flex-direction:column;justify-content:center;min-height:105px}.statbox .symbol{font-size:20px}.statbox strong{font-size:25px;color:var(--lav);margin:5px 0}.statbox span:last-child{font-size:12px;color:var(--muted)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px}.section-head h2{font-size:18px;margin:0}.subtle{color:var(--muted);font-size:13px}.layout{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.task{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #302440}.task:last-child{border-bottom:0}.task input{accent-color:var(--purple);width:19px;height:19px}.task-name{flex:1;font-weight:600;font-size:14px}.reward{color:var(--gold);font-size:12px;font-weight:800;white-space:nowrap}.mission-input{display:flex;gap:8px;margin-top:12px}.mission-input input{flex:1;min-width:0}.mission-input .field{margin:0}.nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.nav button{background:#1a1327;color:var(--muted);border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-weight:700}.nav button.active{background:#392454;color:#fff;border-color:#9367cf}.view{display:none}.view.active{display:block}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.day{min-height:52px;border:1px solid var(--line);border-radius:10px;background:#1a1327;padding:7px;text-align:center;font-size:12px;color:var(--muted)}.day.done{border-color:#7c58b1;background:#35224c;color:#fff}.day.today{outline:2px solid var(--gold);outline-offset:1px}.summary-list{display:grid;gap:8px}.summary-item{display:flex;justify-content:space-between;background:#211735;border-radius:12px;padding:11px 13px;font-size:13px}.skill-card{background:#211735;border:1px solid var(--line);border-radius:15px;padding:14px;margin:12px 0}.skill-top{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:14px}.skill-rank{font-size:11px;color:var(--gold);margin-top:5px}.skill-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin:9px 0 6px}.skill-card .progress{height:9px}.badges{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.achievement{border:1px solid var(--line);border-radius:15px;padding:13px;background:#1b142a;position:relative;overflow:hidden}.achievement.unlocked{box-shadow:0 0 18px #a879f522}.achievement .medal{font-size:27px}.achievement strong{display:block;margin:6px 0;font-size:13px}.achievement span{font-size:11px;color:var(--muted);display:block}.achievement .rarity{font-weight:800;letter-spacing:1px;margin-top:8px}.achievement.locked{opacity:.55;filter:saturate(.5)}.rarity-plata{color:#c5cedb}.rarity-oro{color:#f1cc62}.rarity-platino{color:#b6e1f3}.rarity-diamante{color:#64c9ff}.rarity-rubi{color:#ff6689}.achievement.unlocked:after{content:"✓";position:absolute;right:12px;top:10px;color:var(--green);font-weight:900}.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#2a1d3c;border:1px solid #a879f5;color:white;padding:13px 18px;border-radius:14px;box-shadow:0 8px 30px #0008;z-index:20;text-align:center;max-width:90%;animation:pop .35s ease}.toast strong{color:var(--gold)}@keyframes pop{from{opacity:0;transform:translate(-50%,12px) scale(.96)}to{opacity:1;transform:translate(-50%,0) scale(1)}}footer{text-align:center;color:#887b9d;font-size:11px;margin-top:28px}@media(max-width:720px){.app{padding:13px 12px 95px}.hero{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.hero-side{grid-template-columns:repeat(4,1fr)}.statbox{min-height:90px;padding:10px}.statbox strong{font-size:20px}.brand h1{font-size:17px}.pill{display:none}.nav{display:grid;grid-template-columns:repeat(3,1fr)}.nav button{font-size:12px;padding:10px 5px}.badges{grid-template-columns:1fr 1fr}}
+
+/* Diseños especiales para cada rareza */
+.achievement.rarity-plata.unlocked{background:linear-gradient(145deg,#343d4b,#1b142a 72%);border-color:#aeb9c8;box-shadow:0 0 16px #c5cedb30}
+.achievement.rarity-oro.unlocked{background:linear-gradient(145deg,#51401e,#1b142a 72%);border-color:#e8c878;box-shadow:0 0 18px #f1cc6238}
+.achievement.rarity-platino.unlocked{background:linear-gradient(145deg,#244657,#1b142a 72%);border-color:#b6e1f3;box-shadow:0 0 18px #b6e1f340}
+.achievement.rarity-diamante.unlocked{background:linear-gradient(145deg,#153e5c,#1b142a 72%);border-color:#64c9ff;box-shadow:0 0 20px #64c9ff45}
+.achievement.rarity-rubi.unlocked{background:linear-gradient(145deg,#5a2038,#1b142a 72%);border-color:#ff6689;box-shadow:0 0 22px #ff66894a}
+.achievement .medal{display:inline-grid;place-items:center;min-width:48px;min-height:48px;padding:5px;border-radius:50%;background:#292039;border:1px solid var(--line);font-size:25px}
+.achievement.rarity-plata .medal{background:linear-gradient(145deg,#667383,#252d3a);border-color:#c5cedb}
+.achievement.rarity-oro .medal{background:linear-gradient(145deg,#a77b25,#493416);border-color:#f1cc62}
+.achievement.rarity-platino .medal{background:linear-gradient(145deg,#6c9fb4,#294958);border-color:#b6e1f3}
+.achievement.rarity-diamante .medal{background:linear-gradient(145deg,#36a9df,#17466b);border-color:#64c9ff}
+.achievement.rarity-rubi .medal{background:linear-gradient(145deg,#dc456d,#641d3c);border-color:#ff6689}
+.achievement.just-unlocked{animation:unlockPop .75s cubic-bezier(.2,.8,.2,1);z-index:1}
+@keyframes unlockPop{0%{transform:scale(.88);filter:brightness(1)}45%{transform:scale(1.07);filter:brightness(1.8)}75%{transform:scale(.98);filter:brightness(1.25)}100%{transform:scale(1);filter:brightness(1)}}
+.achievement .unlock-date{color:var(--gold);margin-top:7px;font-size:10px}
+
 </style>
 </head>
 <body>
@@ -35,7 +52,7 @@ const defaults=["Leer durante 10 minutos","Practicar inglés","Aprender algo nue
 const skillGroups=[{name:"Lectura",habit:"Leer durante 10 minutos",icon:"📚"},{name:"Inglés",habit:"Practicar inglés",icon:"🌎"},{name:"Aprendizaje",habit:"Aprender algo nuevo",icon:"🧠"},{name:"Programación",habit:"Practicar programación",icon:"💻"},{name:"Comunicación",habit:"Hablar o comunicarme con alguien",icon:"💬"}];
 const rarities=[{name:"Plata",className:"plata",emoji:"🥈",reward:20},{name:"Oro",className:"oro",emoji:"🥇",reward:50},{name:"Platino",className:"platino",emoji:"🏅",reward:100},{name:"Diamante",className:"diamante",emoji:"💎",reward:200},{name:"Rubí",className:"rubi",emoji:"♦️",reward:400}];
 const thresholds=[7,30,100,250,365];
-let user=null,data=null;
+let user=null,data=null,newlyUnlocked=[];
 const $=id=>document.getElementById(id);
 let today=localDateKey(new Date());
 function localDateKey(date){const y=date.getFullYear(),m=String(date.getMonth()+1).padStart(2,"0"),d=String(date.getDate()).padStart(2,"0");return `${y}-${m}-${d}`}
@@ -60,7 +77,8 @@ function achievementDefinitions(){
 function syncAchievements(){
  if(!data.achievementUnlocks)data.achievementUnlocks={};
  let earned=0;
- achievementDefinitions().forEach(a=>{if(a.ok&&!data.achievementUnlocks[a.id]){data.achievementUnlocks[a.id]=new Date().toISOString();data.xp=(data.xp||0)+a.rarity.reward;earned++;}});
+ newlyUnlocked=[];
+ achievementDefinitions().forEach(a=>{if(a.ok&&!data.achievementUnlocks[a.id]){data.achievementUnlocks[a.id]=new Date().toISOString();data.xp=(data.xp||0)+a.rarity.reward;earned++;newlyUnlocked.push(a.id);}});
  if(earned)showToast(`¡${earned} logro(s) desbloqueado(s)! XP de recompensa añadido.`);
 }
 function showToast(message){const root=$("toastRoot");root.innerHTML="";const el=document.createElement("div");el.className="toast";el.textContent=message;root.append(el);setTimeout(()=>{if(el.parentNode)el.remove()},3600)}
@@ -89,8 +107,28 @@ function renderSkills(){
 function renderCalendar(){const root=$("calendar");root.innerHTML="";["D","L","M","X","J","V","S"].forEach(x=>{const e=document.createElement("div");e.className="day";e.textContent=x;e.style.minHeight="auto";e.style.fontWeight="800";root.append(e)});const start=new Date();start.setDate(start.getDate()-34);for(let i=0;i<35;i++){const dt=new Date(start);dt.setDate(start.getDate()+i);const key=localDateKey(dt),day=data.days[key],el=document.createElement("div");el.className="day";el.textContent=dt.getDate();if(key===today)el.classList.add("today");if(day){const total=(data.habits||defaults).length+(day.missions||[]).length,done=Object.values(day.habits||{}).filter(Boolean).length+(day.missions||[]).filter(m=>m.done).length;if(total>0&&done===total)el.classList.add("done")}root.append(el)}}
 function renderAchievements(){
  const root=$("achievements");root.innerHTML="";const defs=achievementDefinitions();let unlocked=0;
- defs.forEach(a=>{const isUnlocked=!!(data.achievementUnlocks&&data.achievementUnlocks[a.id]);if(isUnlocked)unlocked++;const el=document.createElement("div");el.className="achievement "+(isUnlocked?"unlocked":"locked");const icon=document.createElement("div");icon.className="medal";icon.textContent=a.rarity.emoji+" "+a.icon;const name=document.createElement("strong");name.textContent=a.name;const desc=document.createElement("span");desc.textContent=a.desc;const rarity=document.createElement("span");rarity.className="rarity rarity-"+a.rarity.className;rarity.textContent=`${a.rarity.name} · +${a.rarity.reward} XP`;const status=document.createElement("span");status.textContent=isUnlocked?"Desbloqueado":"Bloqueado";el.append(icon,name,desc,rarity,status);root.append(el)});
+ defs.forEach(a=>{
+  const unlockDate=data.achievementUnlocks&&data.achievementUnlocks[a.id];
+  const isUnlocked=!!unlockDate;
+  if(isUnlocked)unlocked++;
+  const el=document.createElement("div");
+  el.className="achievement rarity-"+a.rarity.className+" "+(isUnlocked?"unlocked":"locked")+(newlyUnlocked.includes(a.id)?" just-unlocked":"");
+  const icon=document.createElement("div");icon.className="medal";icon.textContent=a.rarity.emoji+" "+a.icon;
+  const name=document.createElement("strong");name.textContent=a.name;
+  const desc=document.createElement("span");desc.textContent=a.desc;
+  const rarity=document.createElement("span");rarity.className="rarity rarity-"+a.rarity.className;rarity.textContent=`${a.rarity.name} · +${a.rarity.reward} XP`;
+  const status=document.createElement("span");status.textContent=isUnlocked?"Desbloqueado":"Bloqueado";
+  el.append(icon,name,desc,rarity,status);
+  if(isUnlocked){
+   const date=document.createElement("span");date.className="unlock-date";
+   const parsedDate=new Date(unlockDate);
+   date.textContent="Conseguido el "+(Number.isNaN(parsedDate.getTime())?"fecha registrada":parsedDate.toLocaleDateString("es-ES",{day:"numeric",month:"long",year:"numeric"}));
+   el.append(date);
+  }
+  root.append(el);
+ });
  $("achievementSummary").textContent=`${unlocked} / ${defs.length} desbloqueados`;
+ newlyUnlocked=[];
 }
 document.querySelectorAll(".nav button").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b===btn));document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===btn.dataset.view))}));
 $("register").onclick=async()=>{try{await createUserWithEmailAndPassword(auth,$("email").value,$("password").value)}catch(e){$("message").textContent=e.message}};
